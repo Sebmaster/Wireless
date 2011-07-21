@@ -12,7 +12,7 @@ Place a sign with the following lines somewhere:
 You can replace "\<channelname\>" with anything you like. As soon as you're finished editing the sign, the first line changes to "[Transmitter]".
 This means, the sign got recognized and the plugin is working correctly.
 
-Afterwars place another sign somewhere else with the following lines:
+Afterwards place another sign somewhere else with the following lines:
 
 * receiver
 * \<channelname\>
