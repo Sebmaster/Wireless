@@ -17,6 +17,6 @@ Afterwars place another sign somewhere else with the following lines:
 * receiver
 * \<channelname\>
 
-"\<channelname\>" should be the same value, you put on the transmitter sign (case-sesitive). As with the transmitter sign, the first line also changes to "[Receiver]".
+"\<channelname\>" should be the same value, you put on the transmitter sign (case-sensitive). As with the transmitter sign, the first line also changes to "[Receiver]".
 
 After this is done, you can connect the transmitter to some powered redstone. As soon as this is done, the receiver sign should change to a redtorch.
