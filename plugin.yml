@@ -1,0 +1,5 @@
+name: Wireless
+main: com.sebmaster.wireless.Wireless
+version: 0.1
+author: Sebmaster
+description: Adds transmitters/receivers for redstone
