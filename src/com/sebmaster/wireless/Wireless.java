@@ -1,6 +1,5 @@
 package com.sebmaster.wireless;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,7 +19,6 @@ import org.bukkit.util.config.Configuration;
 public class Wireless extends JavaPlugin {
 
 	private ArrayList<Channel> channels = new ArrayList<Channel>();
-	final private File config = new File("plugins/Wireless/Channels.yml");
 	private Logger logger = Logger.getLogger("Wireless");
 
 	@Override
@@ -43,7 +41,7 @@ public class Wireless extends JavaPlugin {
 	}
 
 	private void load() {
-		Configuration config = new Configuration(this.config);
+		Configuration config = this.getConfiguration();
 		config.load();
 
 		Server s = Bukkit.getServer();
@@ -79,7 +77,7 @@ public class Wireless extends JavaPlugin {
 	}
 
 	private void save() {
-		Configuration config = new Configuration(this.config);
+		Configuration config = this.getConfiguration();
 		for (int i = 0; i < this.channels.size(); ++i) {
 			Channel c = this.channels.get(i);
 			config.setProperty(i + ".name", c.name);
