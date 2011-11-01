@@ -37,7 +37,7 @@ public class Wireless extends JavaPlugin {
 		pm.registerEvent(Type.SIGN_CHANGE, l.bl, Priority.High, this);
 		pm.registerEvent(Type.REDSTONE_CHANGE, l.bl, Priority.High, this);
 
-		logger.info("Wireless v0.1 loaded successfully.");
+		logger.info("Wireless v1.1 loaded successfully.");
 	}
 
 	private void load() {
