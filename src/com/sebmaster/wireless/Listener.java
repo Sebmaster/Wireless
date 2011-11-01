@@ -101,15 +101,11 @@ public class Listener {
 				channel = plugin.getChannel(evt.getLine(1));
 			}
 			
-			ChannelNode c;
 			if (type.equals("[Transmitter]")) {
-				c = channel.addTransmitter(evt.getBlock().getLocation());
+				channel.addTransmitter(evt.getBlock().getLocation(), evt.getBlock().getType() == Material.WALL_SIGN ? true : false);
 			} else {
-				Receiver r = channel.addReceiver(evt.getBlock().getLocation());
-				r.signData = evt.getBlock().getData();
-				c = r;
+				channel.addReceiver(evt.getBlock().getLocation(), evt.getBlock().getType() == Material.WALL_SIGN ? true : false, evt.getBlock().getData());
 			}
-			c.isWallSign = evt.getBlock().getType() == Material.WALL_SIGN ? true : false;
 			
 			channel.update();
 		}
