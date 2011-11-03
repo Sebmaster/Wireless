@@ -32,11 +32,11 @@ public class Receiver extends ChannelNode {
     	if (power && !isPowered) {
     		signData = location.getBlock().getData();
 			location.getBlock().setData((byte) (isWallSign ? (6 - signData) : 0x05));
-    		location.getBlock().setTypeIdAndData(Material.REDSTONE_TORCH_ON.getId(), (byte) (isWallSign ? (6 - signData) : 0x05), false);
+    		location.getBlock().setTypeIdAndData(Material.REDSTONE_TORCH_ON.getId(), (byte) (isWallSign ? (6 - signData) : 0x05), true);
     		isPowered = true;
     	} else if (!power && isPowered) {
     		location.getBlock().setData(signData);
-    		location.getBlock().setTypeIdAndData((isWallSign ? Material.WALL_SIGN : Material.SIGN_POST).getId(), signData, false);
+    		location.getBlock().setTypeIdAndData((isWallSign ? Material.WALL_SIGN : Material.SIGN_POST).getId(), signData, true);
     		Sign s = (Sign)location.getBlock().getState();
     		s.setLine(0, "[Receiver]");
     		s.setLine(1, channel.name);
