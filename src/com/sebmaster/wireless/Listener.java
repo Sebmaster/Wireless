@@ -19,6 +19,13 @@ import org.bukkit.inventory.ItemStack;
  * @author Sebmaster
  */
 public class Listener {
+
+	final Material[] exclude = new Material[] {
+	        Material.PISTON_STICKY_BASE,
+	        Material.PISTON_BASE,
+	        Material.PISTON_EXTENSION,
+	        Material.PISTON_MOVING_PIECE
+	};
 	
 	Wireless plugin;
 	
@@ -79,6 +86,7 @@ public class Listener {
 					}
 				}
 			}
+			
 			for (Channel c : changed) {
 				c.update();
 			}
@@ -97,6 +105,20 @@ public class Listener {
 			if (type == null) {
 				return;
 			} else {
+				boolean excluded = false;
+				Sign s = (Sign) evt.getBlock().getState();
+				Block checkBlock = evt.getBlock().getRelative(((org.bukkit.material.Sign) s.getData()).getAttachedFace());
+				
+				for (Material m : exclude) {
+					if (m == checkBlock.getType()) {
+						excluded = true;
+						break;
+					}
+				}
+				
+				if (excluded) {
+					return;
+				}
 				evt.setLine(0, type);
 				channel = plugin.getChannel(evt.getLine(1));
 			}
