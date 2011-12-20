@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
@@ -48,25 +49,31 @@ public class Wireless extends JavaPlugin {
 			Channel c = new Channel(config.getString(idx + ".name"), this);
 			channels.add(c);
 
-			Set<String> keys = config.getConfigurationSection(idx + ".transmitters").getKeys(false);
-			if (keys != null) {
-				for (String i : keys) {
-					Location loc = new Location(s.getWorld(config.getString(idx + ".transmitters." + i + ".world")),
-					        config.getInt(idx + ".transmitters." + i + ".x", 0),
-					        config.getInt(idx + ".transmitters." + i + ".y", 0),
-					        config.getInt(idx + ".transmitters." + i + ".z", 0));
-					c.addTransmitter(loc, config.getBoolean(idx + ".transmitters." + i + ".isWallSign", false));
+			ConfigurationSection node = config.getConfigurationSection(idx + ".transmitters");
+			if (node != null) {
+				Set<String> keys = node.getKeys(false);
+				if (keys != null) {
+					for (String i : keys) {
+						Location loc = new Location(s.getWorld(config.getString(idx + ".transmitters." + i + ".world")),
+						        config.getInt(idx + ".transmitters." + i + ".x", 0),
+						        config.getInt(idx + ".transmitters." + i + ".y", 0),
+						        config.getInt(idx + ".transmitters." + i + ".z", 0));
+						c.addTransmitter(loc, config.getBoolean(idx + ".transmitters." + i + ".isWallSign", false));
+					}
 				}
 			}
 
-			keys = config.getConfigurationSection(idx + ".receivers").getKeys(false);
-			if (keys != null) {
-				for (String i : keys) {
-					Location loc = new Location(s.getWorld(config.getString(idx + ".receivers." + i + ".world")),
-					        config.getInt(idx + ".receivers." + i + ".x", 0),
-					        config.getInt(idx + ".receivers." + i + ".y", 0),
-					        config.getInt(idx + ".receivers." + i + ".z", 0));
-					c.addReceiver(loc, config.getBoolean(idx + ".receivers." + i + ".isWallSign", false), (byte) config.getInt(idx + ".receivers." + i + ".signData", 0));
+			node = config.getConfigurationSection(idx + ".receivers");
+			if (node != null) {
+				Set<String> keys = node.getKeys(false);
+				if (keys != null) {
+					for (String i : keys) {
+						Location loc = new Location(s.getWorld(config.getString(idx + ".receivers." + i + ".world")),
+						        config.getInt(idx + ".receivers." + i + ".x", 0),
+						        config.getInt(idx + ".receivers." + i + ".y", 0),
+						        config.getInt(idx + ".receivers." + i + ".z", 0));
+						c.addReceiver(loc, config.getBoolean(idx + ".receivers." + i + ".isWallSign", false), (byte) config.getInt(idx + ".receivers." + i + ".signData", 0));
+					}
 				}
 			}
 		}
