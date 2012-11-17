@@ -9,8 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,10 +31,8 @@ public class Wireless extends JavaPlugin {
 		Listener l = new Listener(this);
 
 		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvent(Type.WORLD_UNLOAD, l.wl, Priority.Normal, this);
-		pm.registerEvent(Type.BLOCK_BREAK, l.bl, Priority.Normal, this);
-		pm.registerEvent(Type.SIGN_CHANGE, l.bl, Priority.High, this);
-		pm.registerEvent(Type.REDSTONE_CHANGE, l.bl, Priority.High, this);
+		pm.registerEvents(l.wl, this);
+		pm.registerEvents(l.bl, this);
 
 		logger.info("Wireless v1.2.3 loaded successfully.");
 	}

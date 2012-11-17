@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.block.SignChangeEvent;
@@ -16,7 +17,7 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * @author Sebmaster
+ * @author Sebastian Mayr
  */
 public class Listener {
 
@@ -29,9 +30,9 @@ public class Listener {
 	
 	Wireless plugin;
 	
-	public class BlockListener extends org.bukkit.event.block.BlockListener {
+	public class BlockListener implements org.bukkit.event.Listener {
 		
-		@Override
+		@EventHandler
 		public void onBlockBreak(BlockBreakEvent evt) {
 			Block b = evt.getBlock();
 			if (b.getState() instanceof Sign) {
@@ -72,7 +73,7 @@ public class Listener {
 			}
 		}
 
-		@Override
+		@EventHandler
 		public void onBlockRedstoneChange(BlockRedstoneEvent evt) {
 			ArrayList<Channel> changed = new ArrayList<Channel>();
 			BlockState b = evt.getBlock().getState();
@@ -97,7 +98,7 @@ public class Listener {
 		 * 
 		 * @param evt the signchange event
 		 */
-		@Override
+		@EventHandler
 		public void onSignChange(SignChangeEvent evt) {
 			String type = setTransmitterOrReceiver(evt.getLine(0));
 			Channel channel = null;
@@ -133,9 +134,9 @@ public class Listener {
 		}
 	}
 	
-	public class WorldListener extends org.bukkit.event.world.WorldListener {
-		
-		@Override
+	public class WorldListener implements org.bukkit.event.Listener {
+
+		@EventHandler
 		public void onChunkUnload(ChunkUnloadEvent evt) {
 			if (evt.isCancelled()) return;
 			
